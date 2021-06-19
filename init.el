@@ -124,7 +124,6 @@
    ("C-z" . helm-select-action)))
 
 (use-package helm-swoop
-  :requires helm
   :bind
   (("C-s" . helm-swoop)))
 
@@ -182,10 +181,10 @@
   :config
   (setq projectile-project-search-path '("~/projects/")
         projectile-indexing-method 'alien
-        projectile-enable-caching t))
+        projectile-enable-caching t
+        ))
 
 (use-package helm-projectile
-  :requires helm
   :after projectile
   :config
   (helm-projectile-on))
@@ -193,6 +192,11 @@
 ;; Diff-hl
 (use-package diff-hl
   :hook
-  ((after-init . diff-hl-mode)))
+  ((after-init . global-diff-hl-mode))
+  :config
+  (diff-hl-margin-mode))
+
+;; Magit
+(use-package magit)
 
 ;;; EmacsLisp
