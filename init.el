@@ -100,6 +100,11 @@
 (setq straight-use-package-by-default t)
 
 (straight-use-package 'use-package)
+(straight-use-package 'diminish)
+
+;; Autorevert
+(use-package autorevert
+  :diminish auto-revert-mode)
 
 ;; Recentf
 (use-package recentf
@@ -113,6 +118,22 @@
 (use-package display-line-numbers
   :hook
   ((prog-mode . display-line-numbers-mode)))
+
+;; Eldoc
+(use-package eldoc
+  :defer t
+  :diminish eldoc-mode)
+
+;; Which-Key
+(use-package which-key
+  :diminish which-key-mode
+  :hook
+  ((after-init . which-key-mode)))
+
+(use-package general
+  :config
+  (general-create-definer my-major-mode-definer
+    :prefix "C-c m"))
 
 ;; Helm
 (use-package helm
@@ -163,6 +184,7 @@
 
 ;; Company
 (use-package company
+  :diminish company-mode
   :hook
   ((emacs-lisp-mode . company-mode))
   :bind
