@@ -100,11 +100,11 @@
 
 ;; Recentf
 (use-package recentf
-  :hook
-  ((after-init . recentf-mode))
   :config
   (setq recentf-save-file (concat my-cache-dir "recentf")
-	recentf-auto-cleanup 5))
+	    recentf-auto-cleanup 5)
+
+  (recentf-mode 1))
 
 ;; Line numbers
 (use-package display-line-numbers
@@ -121,7 +121,9 @@
    ("C-h SPC" . helm-all-mark-rings)
    :map helm-map
    ("<tab>" . helm-execute-persistent-action)
-   ("C-z" . helm-select-action)))
+   ("C-z" . helm-select-action))
+  :config
+  (setq helm-ff-file-name-history-use-recentf t))
 
 (use-package helm-swoop
   :bind
@@ -182,7 +184,8 @@
   (setq projectile-project-search-path '("~/projects/")
         projectile-indexing-method 'alien
         projectile-enable-caching t
-        ))
+        projectile-cache-file (concat my-cache-dir "projectile.cache")
+        projectile-known-projects-file (concat my-cache-dir "known-projects.eld")))
 
 (use-package helm-projectile
   :after projectile
@@ -195,6 +198,11 @@
   ((after-init . global-diff-hl-mode))
   :config
   (diff-hl-margin-mode))
+
+;; Transient
+(use-package transient
+  :config
+  (setq transient-history-file (concat my-cache-dir "transient-history.el")))
 
 ;; Magit
 (use-package magit)
