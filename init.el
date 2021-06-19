@@ -168,6 +168,13 @@
   :bind
   (("C-s" . helm-swoop)))
 
+(use-package helm-icons
+  :after helm
+  :config
+  (setq helm-icons-provider 'all-the-icons)
+
+  (helm-icons-enable))
+
 ;; Avy
 (use-package avy
   :bind
