@@ -182,6 +182,14 @@
   :config
   (setq electric-pair-preserve-balance t))
 
+;; Treemacs
+(use-package treemacs
+  :bind
+  (("C-c t t" . treemacs)))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile))
+
 ;; Company
 (use-package company
   :diminish company-mode
