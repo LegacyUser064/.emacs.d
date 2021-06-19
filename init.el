@@ -185,7 +185,10 @@
 ;; Treemacs
 (use-package treemacs
   :bind
-  (("C-c t t" . treemacs)))
+  (("C-c t t" . treemacs))
+  :config
+  (setq treemacs-persist-file (concat my-cache-dir "treemacs-persist")
+        treemacs-last-error-persist-file (concat my-cache-dir "treemacs-persist-at-last-error")))
 
 (use-package treemacs-projectile
   :after (treemacs projectile))
