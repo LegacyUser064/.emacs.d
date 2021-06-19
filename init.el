@@ -1,5 +1,11 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; Disable garbage collection during startup
+(setq gc-cons-threshold most-positive-fixnum)
+
+;; Change working directory to config directory
+(setq default-directory "~/.emacs.d/")
+
 (defconst my-cache-dir (concat user-emacs-directory "cache/"))
 (defconst my-config-dir (concat user-emacs-directory "config/"))
 (defconst my-local-dir (concat user-emacs-directory "local/"))
@@ -59,8 +65,8 @@
 
 ;; Tabs
 (setq-default indent-tabs-mode nil
-	      tab-width 4
-	      tab-always-indent t)
+	          tab-width 4
+	          tab-always-indent t)
 
 ;; Fill column
 (setq-default fill-column 80)
@@ -102,17 +108,27 @@
 (straight-use-package 'use-package)
 (straight-use-package 'diminish)
 
+;; GCMH
+(use-package gcmh
+  :diminish gcmh-mode
+  :hook
+  ((emacs-startup . gcmh-mode))
+  :init
+  (setq gcmh-idle-delay 5
+        gcmh-high-cons-threshold (* 16 1024 1024)))
+
 ;; Autorevert
 (use-package autorevert
-  :diminish auto-revert-mode)
+  :defer t
+  :diminish auto-revert-mode
+  )
 
 ;; Recentf
 (use-package recentf
+  :defer 2
   :config
   (setq recentf-save-file (concat my-cache-dir "recentf")
-	    recentf-auto-cleanup 5)
-
-  (recentf-mode 1))
+	    recentf-auto-cleanup 5))
 
 ;; Line numbers
 (use-package display-line-numbers
@@ -125,14 +141,11 @@
   :diminish eldoc-mode)
 
 ;; All the icons
-(use-package all-the-icons)
-
-;; Dired
-(use-package dired
+(use-package all-the-icons
   :defer t)
 
-(use-package dired+
-  :after dired)
+;; Dired
+(use-package dired+)
 
 (use-package all-the-icons-dired
   :hook
@@ -162,7 +175,8 @@
    ("<tab>" . helm-execute-persistent-action)
    ("C-z" . helm-select-action))
   :config
-  (setq helm-ff-file-name-history-use-recentf t))
+  (setq helm-ff-file-name-history-use-recentf t
+        helm-M-x-always-save-history t))
 
 (use-package helm-swoop
   :bind
@@ -212,7 +226,7 @@
         treemacs-last-error-persist-file (concat my-cache-dir "treemacs-persist-at-last-error")))
 
 (use-package treemacs-projectile
-  :after (treemacs projectile))
+  :after treemacs)
 
 ;; Company
 (use-package company
@@ -238,10 +252,15 @@
 		  company-dabbrev-code
 		  company-dabbrev)))
 
+;; Esup
+(use-package esup
+  :disabled
+  :defer t
+  :commands (esup))
+
 ;; Projectile
 (use-package projectile
-  :hook
-  ((after-init . projectile-mode))
+  :defer 1
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map))
@@ -250,22 +269,22 @@
         projectile-indexing-method 'alien
         projectile-enable-caching t
         projectile-cache-file (concat my-cache-dir "projectile.cache")
-        projectile-known-projects-file (concat my-cache-dir "known-projects.eld")))
+        projectile-known-projects-file (concat my-cache-dir "known-projects.eld"))
+
+  (projectile-mode 1))
 
 (use-package helm-projectile
-  :after projectile
-  :config
-  (helm-projectile-on))
+  :bind
+  (([remap projectile-switch-project] . helm-projectile-switch-project)
+   ([remap projectile-find-file] . helm-projectile-find-file)))
 
-;; Diff-hl
-(use-package diff-hl
-  :hook
-  ((after-init . global-diff-hl-mode))
+;; Git-Gutter
+(use-package git-gutter
+  :defer 2
   :config
-  (setq diff-hl-flydiff-delay nil)
+  (setq git-gutter:update-interval 0)
   
-  (diff-hl-margin-mode)
-  (diff-hl-flydiff-mode))
+  (global-git-gutter-mode 1))
 
 ;; Transient
 (use-package transient
@@ -274,6 +293,7 @@
   (setq transient-history-file (concat my-cache-dir "transient-history.el")))
 
 ;; Magit
-(use-package magit)
+(use-package magit
+  :defer 1)
 
 ;;; EmacsLisp
