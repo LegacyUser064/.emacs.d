@@ -296,4 +296,49 @@
 (use-package magit
   :defer 1)
 
+;; Yasnippet
+(use-package yasnippet
+  :defer t)
+
+;; Flycheck
+
+;; LSP
+(use-package lsp-mode
+  :defer t
+  :commands lsp-deferred
+  :hook
+  ((lsp-mode . lsp-enable-which-key-integration))
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-idle-delay 0.30
+        lsp-auto-configure nil
+        lsp-enable-folding nil
+        lsp-enable-imenu nil
+        lsp-enable-indentation nil
+        lsp-enable-links nil
+        lsp-enable-on-type-formatting nil
+        lsp-enable-text-document-color nil
+        lsp-enable-xref nil
+        lsp-keep-workspace-alive nil
+        lsp-server-install-dir (concat my-cache-dir "lsp/")
+        lsp-session-file (concat my-cache-dir "lsp-session"))
+
+  ;; Diagnostics
+  (setq lsp-diagnostics-provider 'flycheck)
+
+  ;; Modeline
+  (setq lsp-modeline-code-actions-enable nil
+        lsp-modeline-diagnostics-enable nil
+        lsp-modeline-workspace-status-enable t)
+
+  ;; Lens
+  (setq lsp-lens-enable nil)
+
+  ;; Icons
+  (setq lsp-headerline-breadcrumb-icons-enable nil)
+
+  ;; Semantic Tokens
+  (setq lsp-semantic-tokens-enable nil))
+
 ;;; EmacsLisp
