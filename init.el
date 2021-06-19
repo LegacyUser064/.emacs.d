@@ -122,6 +122,7 @@
    ("C-x b" . helm-mini)
    ("M-y" . helm-show-kill-ring)
    ("C-h SPC" . helm-all-mark-rings)
+   ("C-h a" . helm-apropos)
    :map helm-map
    ("<tab>" . helm-execute-persistent-action)
    ("C-z" . helm-select-action))
@@ -135,7 +136,8 @@
 ;; Avy
 (use-package avy
   :bind
-  (("C-;" . avy-goto-char-timer)))
+  (("C-;" . avy-goto-char-timer)
+   ("M-g g" . avy-goto-line)))
 
 ;; Highlight Line
 (use-package hl-line
@@ -204,6 +206,7 @@
 
 ;; Transient
 (use-package transient
+  :defer t
   :config
   (setq transient-history-file (concat my-cache-dir "transient-history.el")))
 
