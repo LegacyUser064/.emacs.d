@@ -54,6 +54,9 @@
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
 
+;; Yes/no to y/n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Tabs
 (setq-default indent-tabs-mode nil
 	      tab-width 4
