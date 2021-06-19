@@ -124,6 +124,20 @@
   :defer t
   :diminish eldoc-mode)
 
+;; All the icons
+(use-package all-the-icons)
+
+;; Dired
+(use-package dired
+  :defer t)
+
+(use-package dired+
+  :after dired)
+
+(use-package all-the-icons-dired
+  :hook
+  ((dired-mode . all-the-icons-dired-mode)))
+
 ;; Which-Key
 (use-package which-key
   :diminish which-key-mode
@@ -241,7 +255,10 @@
   :hook
   ((after-init . global-diff-hl-mode))
   :config
-  (diff-hl-margin-mode))
+  (setq diff-hl-flydiff-delay nil)
+  
+  (diff-hl-margin-mode)
+  (diff-hl-flydiff-mode))
 
 ;; Transient
 (use-package transient
