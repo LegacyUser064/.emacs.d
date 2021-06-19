@@ -226,7 +226,7 @@
    ("<backtab>" . company-select-previous))
   :config
   (setq company-idle-delay 0
-	company-minimum-prefix-length 1
+	company-minimum-prefix-length 2
 	company-selection-wrap-around t
 	company-show-numbers t
 	company-format-margin-function nil)
