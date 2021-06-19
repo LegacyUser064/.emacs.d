@@ -137,7 +137,13 @@
 (use-package avy
   :bind
   (("C-;" . avy-goto-char-timer)
-   ("M-g g" . avy-goto-line)))
+   ("M-g g" . my-avy-goto-line))
+  :config
+  (defun my-avy-goto-line ()
+    "A wrapper around avy-goto-line that recenters the screen after the jump"
+    (interactive)
+    (avy-goto-line)
+    (recenter)))
 
 ;; Highlight Line
 (use-package hl-line
