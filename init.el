@@ -6,6 +6,7 @@
 ;; Change working directory to config directory
 (setq default-directory "~/.emacs.d/")
 
+(defconst my-private-dir (concat user-emacs-directory "private/"))
 (defconst my-cache-dir (concat user-emacs-directory "cache/"))
 (defconst my-config-dir (concat user-emacs-directory "config/"))
 (defconst my-local-dir (concat user-emacs-directory "local/"))
@@ -31,6 +32,12 @@
 
 ;; Custom file
 (setq custom-file (concat my-config-dir "custom.el"))
+
+;; Add private directory to load path
+(add-to-list 'load-path my-private-dir)
+
+;; Load personal info
+(require 'personal)
 
 ;; Disable lock files
 (setq create-lockfiles nil)
