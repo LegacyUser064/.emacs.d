@@ -45,6 +45,14 @@
       backup-directory-alist (list (cons "." (concat my-cache-dir "backups/")))
       tramp-backup-directory-alist backup-directory-alist)
 
+;; Minibuffer
+(setq enable-recursive-minibuffers t
+      echo-keystrokes 0.02
+      minibuffer-prompt-properties
+      '(read-only t intangible t cursor-intangible t face minibuffer-prompt))
+
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
 ;; Autosave
 (setq auto-save-default t
       auto-save-include-big-deletions t
