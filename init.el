@@ -303,33 +303,68 @@
   (setq lsp-keymap-prefix "C-c l")
   :config
   (setq lsp-idle-delay 0.30
-        lsp-auto-configure nil
+        lsp-auto-configure t
+        lsp-completion-enable t
+        lsp-enable-snippet t
         lsp-enable-folding nil
         lsp-enable-imenu nil
-        lsp-enable-indentation nil
+        lsp-enable-indentation t
         lsp-enable-links nil
         lsp-enable-on-type-formatting nil
         lsp-enable-text-document-color nil
         lsp-enable-xref nil
+        lsp-enable-semantic-highlighting nil
         lsp-keep-workspace-alive nil
-        lsp-server-install-dir (concat my-cache-dir "lsp/")
+        lsp-server-install-dir (concat my-local-dir "lsp/")
         lsp-session-file (concat my-cache-dir "lsp-session"))
 
   ;; Diagnostics
-  (setq lsp-diagnostics-provider 'flycheck)
+  (setq lsp-diagnostics-provider :none)
 
   ;; Modeline
   (setq lsp-modeline-code-actions-enable nil
         lsp-modeline-diagnostics-enable nil
         lsp-modeline-workspace-status-enable t)
 
+  ;; Headerline
+  (setq lsp-headerline-breadcrumb-enable nil
+        lsp-headerline-breadcrumb-enable-diagnostics nil
+        lsp-headerline-breadcrumb-icons-enable nil)
+
   ;; Lens
-  (setq lsp-lens-enable nil)
+  (setq lsp-lens-enable nil))
 
-  ;; Icons
-  (setq lsp-headerline-breadcrumb-icons-enable nil)
 
-  ;; Semantic Tokens
-  (setq lsp-semantic-tokens-enable nil))
+(use-package helm-lsp
+  :bind
+  (:map lsp-mode-map
+   ([remap xref-find-apropos] . helm-lsp-workspace-symbol)))
+
+;; Tree-Sitter
+(use-package tree-sitter
+  :defer t
+  :config
+  (use-package tree-sitter-langs))
 
 ;;; EmacsLisp
+
+;;; Python
+(use-package lsp-pyright
+  :hook
+  ((python-mode . (lambda ()
+                    (require 'lsp-pyright)
+                    (lsp-deferred)
+                    (setq-local company-backends '(company-capf))))))
+
+(use-package pyvenv
+  :defer 2
+  :config
+  (pyvenv-mode)
+  (pyvenv-tracking-mode))
+
+(use-package python
+  :hook
+  ((python-mode . (lambda ()
+                    (electric-pair-mode)
+                    (tree-sitter-mode)
+                    (tree-sitter-hl-mode)))))
