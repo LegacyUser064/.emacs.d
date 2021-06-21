@@ -308,6 +308,10 @@
   :defer t)
 
 ;; Flycheck
+(use-package flycheck
+  :defer t
+  :config
+  (unbind-key "C-c !" flycheck-mode-map))
 
 ;; LSP
 (use-package lsp-mode
@@ -335,7 +339,7 @@
         lsp-session-file (concat my-cache-dir "lsp-session"))
 
   ;; Diagnostics
-  (setq lsp-diagnostics-provider :none)
+  ;;(setq lsp-diagnostics-provider :)
 
   ;; Modeline
   (setq lsp-modeline-code-actions-enable nil
