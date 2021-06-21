@@ -154,16 +154,8 @@
   :defer t
   :diminish eldoc-mode)
 
-;; All the icons
-(use-package all-the-icons
-  :defer t)
-
 ;; Dired
 (use-package dired+)
-
-(use-package all-the-icons-dired
-  :hook
-  ((dired-mode . all-the-icons-dired-mode)))
 
 ;; Which-Key
 (use-package which-key
@@ -195,13 +187,6 @@
 (use-package helm-swoop
   :bind
   (("C-s" . helm-swoop)))
-
-(use-package helm-icons
-  :after helm
-  :config
-  (setq helm-icons-provider 'all-the-icons)
-
-  (helm-icons-enable))
 
 ;; Avy
 (use-package avy
