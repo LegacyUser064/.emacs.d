@@ -125,6 +125,14 @@
   (setq gcmh-idle-delay 5
         gcmh-high-cons-threshold (* 16 1024 1024)))
 
+;; General
+(use-package general
+  :config
+  (general-create-definer my-major-mode-definer
+    :prefix "C-c m")
+  (general-create-definer my-toggle-definer
+    :prefix "C-c t"))
+
 ;; Hungry-Delete
 (use-package smart-hungry-delete
   :bind
