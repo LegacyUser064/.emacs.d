@@ -155,7 +155,10 @@
 ;; Line numbers
 (use-package display-line-numbers
   :hook
-  ((prog-mode . display-line-numbers-mode)))
+  ((prog-mode . display-line-numbers-mode))
+  :general
+  (my-toggle-definer
+    "l" 'display-line-numbers-mode))
 
 ;; Eldoc
 (use-package eldoc
@@ -170,11 +173,6 @@
   :diminish which-key-mode
   :hook
   ((after-init . which-key-mode)))
-
-(use-package general
-  :config
-  (general-create-definer my-major-mode-definer
-    :prefix "C-c m"))
 
 ;; Helm
 (use-package helm
@@ -211,7 +209,10 @@
 ;; Highlight Line
 (use-package hl-line
   :hook
-  ((prog-mode . hl-line-mode)))
+  ((prog-mode . hl-line-mode))
+  :general
+  (my-toggle-definer
+    "h" 'hl-line-mode))
 
 ;; Theme
 (use-package zenburn-theme
@@ -221,13 +222,17 @@
 (use-package elec-pair
   :hook
   ((emacs-lisp-mode . electric-pair-mode))
+  :general
+  (my-toggle-definer
+    "p" 'electric-pair-mode)
   :config
   (setq electric-pair-preserve-balance t))
 
 ;; Treemacs
 (use-package treemacs
-  :bind
-  (("C-c t t" . treemacs))
+  :general
+  (my-toggle-definer
+    "t" 'treemacs)
   :config
   (setq treemacs-persist-file (concat my-cache-dir "treemacs-persist")
         treemacs-last-error-persist-file (concat my-cache-dir "treemacs-persist-at-last-error")))
@@ -245,6 +250,9 @@
    company-active-map
    ("<tab>" . company-complete-common-or-cycle)
    ("<backtab>" . company-select-previous))
+  :general
+  (my-toggle-definer
+    "c" 'company-mode)
   :config
   (setq company-idle-delay 0
 	company-minimum-prefix-length 2
