@@ -277,14 +277,6 @@
   (([remap projectile-switch-project] . helm-projectile-switch-project)
    ([remap projectile-find-file] . helm-projectile-find-file)))
 
-;; Git-Gutter
-(use-package git-gutter
-  :defer 2
-  :config
-  (setq git-gutter:update-interval 0)
-  
-  (global-git-gutter-mode 1))
-
 ;; Transient
 (use-package transient
   :defer t
