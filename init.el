@@ -356,9 +356,11 @@
 
 
 (use-package helm-lsp
+  :after lsp-mode
   :bind
   (:map lsp-mode-map
-   ([remap xref-find-apropos] . helm-lsp-workspace-symbol)))
+        ("C-c l g a" . helm-lsp-workspace-symbol)
+        ("C-c l d l" . helm-lsp-diagnostics)))
 
 ;; Tree-Sitter
 (use-package tree-sitter
