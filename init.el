@@ -125,6 +125,12 @@
   (setq gcmh-idle-delay 5
         gcmh-high-cons-threshold (* 16 1024 1024)))
 
+;; Hungry-Delete
+(use-package smart-hungry-delete
+  :bind
+  (("C-d" . smart-hungry-delete-forward-char)
+   ("<backspace>" . smart-hungry-delete-backward-char)))
+
 ;; Autorevert
 (use-package autorevert
   :defer t
