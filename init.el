@@ -360,7 +360,7 @@
         lsp-modeline-workspace-status-enable t)
 
   ;; Headerline
-  (setq lsp-headerline-breadcrumb-enable nil
+  (setq lsp-headerline-breadcrumb-enable t
         lsp-headerline-breadcrumb-enable-diagnostics nil
         lsp-headerline-breadcrumb-icons-enable nil)
 
