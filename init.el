@@ -312,11 +312,13 @@
 
 ;; Yasnippet
 (use-package yasnippet
-  :defer t)
+  :defer t
+  :diminish yas-minor-mode)
 
 ;; Flycheck
 (use-package flycheck
   :defer t
+  :diminish flycheck-mode
   :config
   (unbind-key "C-c !" flycheck-mode-map))
 
@@ -372,6 +374,7 @@
 ;; Tree-Sitter
 (use-package tree-sitter
   :defer t
+  :diminish tree-sitter-mode
   :config
   (use-package tree-sitter-langs))
 
