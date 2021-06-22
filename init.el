@@ -195,7 +195,11 @@
    ("C-z" . helm-select-action))
   :config
   (setq helm-ff-file-name-history-use-recentf t
-        helm-M-x-always-save-history t))
+        helm-M-x-always-save-history t
+        helm-autoresize-max-height 30
+        helm-autoresize-min-height 15)
+
+  (helm-autoresize-mode t))
 
 (use-package helm-swoop
   :bind
