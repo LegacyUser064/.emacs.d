@@ -382,19 +382,27 @@
 
 ;;; Python
 (use-package lsp-pyright
+  :defer t
   :hook
   ((python-mode . (lambda ()
                     (require 'lsp-pyright)
                     (lsp-deferred)
+                    (yas-minor-mode)
                     (setq-local company-backends '(company-capf))))))
 
 (use-package pyvenv
   :defer 2
+  :diminish pyvenv-mode
+  ;; :bind
+  ;; (("C-c v a" . pyvenv-activate)
+  ;;  ("C-c v d" . pyvenv-deactivate))
   :config
+  (setq pyvenv-mode-line-indicator "")
   (pyvenv-mode)
   (pyvenv-tracking-mode))
 
 (use-package python
+  :defer t
   :hook
   ((python-mode . (lambda ()
                     (electric-pair-mode)
