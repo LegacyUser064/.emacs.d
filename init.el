@@ -10,6 +10,7 @@
 (defconst my-cache-dir (concat user-emacs-directory "cache/"))
 (defconst my-config-dir (concat user-emacs-directory "config/"))
 (defconst my-local-dir (concat user-emacs-directory "local/"))
+(defconst my-lib-dir (concat user-emacs-directory "lib/"))
 
 ;; Disable GUI widgets
 (push '(menu-bar-lines . 0)   default-frame-alist)
@@ -32,6 +33,13 @@
 
 ;; Custom file
 (setq custom-file (concat my-config-dir "custom.el"))
+
+;; Add lib directory to load path
+(add-to-list 'load-path my-lib-dir)
+
+;; Load my libraries
+(require 'commands)
+(require 'util)
 
 ;; Add private directory to load path
 (add-to-list 'load-path my-private-dir)
