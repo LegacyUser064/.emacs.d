@@ -179,7 +179,9 @@
   :defer 2
   :config
   (setq recentf-save-file (concat my-cache-dir "recentf")
-	    recentf-auto-cleanup 5))
+	    recentf-auto-cleanup 5)
+
+  (recentf-mode t))
 
 ;; Line numbers
 (use-package display-line-numbers
