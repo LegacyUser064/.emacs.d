@@ -441,6 +441,22 @@
   :config
   (use-package tree-sitter-langs))
 
+;; File shortcuts
+(defmacro file-sc (file)
+  "Syntax sugar for passing find-file to general.el"
+  `(command-wrap
+    (find-file ,file)))
+
+(defmacro dir-sc (dir)
+  "Syntax sugar for passing dired to general.el"
+  `(command-wrap
+    (dired ,dir)))
+
+(my-file-definer
+  "g" '(:ignore t :wk "goto")
+  "g i" `(,(file-sc user-init-file) :wk "init.el")
+  "g p" `(,(dir-sc "~/projects") :wk "projects"))
+
 ;;; EmacsLisp
 
 ;;; Python
@@ -472,3 +488,11 @@
                     (electric-pair-mode)
                     (tree-sitter-mode)
                     (tree-sitter-hl-mode)))))
+
+(defalias 'create-python-proj 'my-create-python-project)
+(defalias 'create-exp-proj 'my-create-exploit-project)
+
+(my-file-definer
+  "c" '(:ignore t :wk "create")
+  "c p" '(create-python-proj :wk "python project")
+  "c e" '(create-exp-proj :wk "exploit project"))
