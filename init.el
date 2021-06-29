@@ -208,6 +208,7 @@
 
 ;; Helm
 (use-package helm
+  :diminish helm-mode
   :bind
   (("M-x" . helm-M-x)
    ("C-x C-f" . helm-find-files)
@@ -223,7 +224,8 @@
         helm-M-x-always-save-history t
         helm-autoresize-max-height 30
         helm-autoresize-min-height 15)
-
+  
+  (helm-mode t)
   (helm-autoresize-mode t))
 
 (use-package helm-swoop
