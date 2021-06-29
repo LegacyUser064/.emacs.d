@@ -197,7 +197,8 @@
   :diminish eldoc-mode)
 
 ;; Dired
-(use-package dired+)
+(use-package dired+
+  :defer 2)
 
 ;; Which-Key
 (use-package which-key
