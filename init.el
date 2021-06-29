@@ -139,6 +139,13 @@
     :prefix "C-c m")
   (general-create-definer my-toggle-definer
     :prefix "C-c t"))
+;; Window divider
+(setq window-divider-default-places t
+      window-divider-default-bottom-width 1
+      window-divider-default-right-width 1)
+
+(add-hook 'after-init-hook #'window-divider-mode)
+
 
 ;; Hungry-Delete
 (use-package smart-hungry-delete
