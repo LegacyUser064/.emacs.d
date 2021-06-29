@@ -154,6 +154,13 @@
 
 (add-hook 'after-init-hook #'window-divider-mode)
 
+;; Fill column indicator
+(use-package fill-column-indicator
+  :hook
+  ((prog-mode . fci-mode))
+  :general
+  (my-toggle-definer
+    "f" 'fci-mode))
 
 ;; Hungry-Delete
 (use-package smart-hungry-delete
