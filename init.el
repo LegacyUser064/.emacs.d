@@ -403,10 +403,36 @@
 
 (use-package helm-lsp
   :after lsp-mode
-  :bind
-  (:map lsp-mode-map
-        ("C-c l g a" . helm-lsp-workspace-symbol)
-        ("C-c l d l" . helm-lsp-diagnostics)))
+  ;; :bind
+  ;; (:map lsp-mode-map
+  ;;       ("C-c l g a" . helm-lsp-workspace-symbol)
+  ;;       ("C-c l d l" . helm-lsp-diagnostics))
+  :general
+  (general-def
+    :keymap 'lsp-mode-map
+    :prefix "C-c l"
+    "d" '(:ignore t :wk "diagnostics")
+    "d l" '(helm-lsp-diagnostics :wk "list")
+    "g a" '(helm-lsp-workspace-symbol :wk "workspace-symbol")))
+
+;; VTERM
+(use-package vterm
+  :commands vterm-nw
+  :general
+  (general-def
+    :prefix "C-c s"
+    "" '(:ignore t :wk "term")
+    "o" '(vterm :wk "open")
+    "n" '(my-vterm-nw :wk "open in new window"))
+  :config
+  (defun my-vterm-nw ()
+    "Open a terminal in a new window"
+    (interactive)
+    (split-window-horizontally)
+    (other-window)
+    (vterm))
+
+  (defalias 'vterm-nw 'my-vterm-nw))
 
 ;; Tree-Sitter
 (use-package tree-sitter
