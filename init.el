@@ -144,9 +144,15 @@
 (use-package general
   :config
   (general-create-definer my-major-mode-definer
-    :prefix "C-c m")
+    :prefix "C-c m"
+    "" '(:ignore t :which-key "major mode"))
   (general-create-definer my-toggle-definer
-    :prefix "C-c t"))
+    :prefix "C-c t"
+    "" '(:ignore t :which-key "toggle"))
+  (general-create-definer my-file-definer
+    :prefix "C-c f"
+    "" '(:ignore t :which-key "files")))
+
 ;; Window divider
 (setq window-divider-default-places t
       window-divider-default-bottom-width 1
@@ -314,12 +320,12 @@
 ;; Projectile
 (use-package projectile
   :defer 1
-  :bind
-  (:map projectile-mode-map
-        ("C-c p" . projectile-command-map))
+  :general
+  (general-def
+    :keymap 'projectile-mode-map
+    "C-c p" '(:keymap projectile-command-map :wk "projectile"))
   :config
-  (setq projectile-project-search-path '("~/projects/")
-        projectile-indexing-method 'alien
+  (setq projectile-indexing-method 'alien
         projectile-enable-caching t
         projectile-cache-file (concat my-cache-dir "projectile.cache")
         projectile-known-projects-file (concat my-cache-dir "known-projects.eld"))
@@ -423,12 +429,13 @@
 
 (use-package pyvenv
   :defer 2
-  :diminish pyvenv-mode
-  ;; :bind
-  ;; (("C-c v a" . pyvenv-activate)
-  ;;  ("C-c v d" . pyvenv-deactivate))
+  :general
+  (general-def
+    :prefix "C-c v"
+    "" '(:ignore t :which-key "python venv")
+    "a" '(pyvenv-activate :wk "activate")
+    "d" '(pyvenv-deactivate :wk "deactivate"))
   :config
-  (setq pyvenv-mode-line-indicator "")
   (pyvenv-mode)
   (pyvenv-tracking-mode))
 
