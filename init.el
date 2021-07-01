@@ -162,6 +162,7 @@
 
 ;; Fill column indicator
 (use-package fill-column-indicator
+  :disabled
   :hook
   ((prog-mode . fci-mode))
   :general
