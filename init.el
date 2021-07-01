@@ -178,8 +178,7 @@
 ;; Autorevert
 (use-package autorevert
   :defer t
-  :diminish auto-revert-mode
-  )
+  :diminish auto-revert-mode)
 
 ;; Recentf
 (use-package recentf
@@ -250,6 +249,19 @@
     (interactive)
     (avy-goto-line)
     (recenter)))
+
+;; Ace-Window
+(use-package ace-window
+  :bind
+  (("M-o" . ace-window)))
+
+;; Golden-Ratio
+(use-package golden-ratio
+  :defer 2
+  :diminish golden-ratio-mode
+  :config
+  (add-to-list 'golden-ratio-extra-commands 'ace-window)
+  (golden-ratio-mode t))
 
 ;; Highlight Line
 (use-package hl-line
