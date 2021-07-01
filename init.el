@@ -341,7 +341,8 @@
   (setq projectile-indexing-method 'alien
         projectile-enable-caching t
         projectile-cache-file (concat my-cache-dir "projectile.cache")
-        projectile-known-projects-file (concat my-cache-dir "known-projects.eld"))
+        projectile-known-projects-file (concat my-cache-dir "known-projects.eld")
+        projectile-auto-discover nil)
 
   (projectile-mode 1))
 
