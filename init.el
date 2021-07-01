@@ -431,7 +431,7 @@
 
 ;; VTERM
 (use-package vterm
-  :commands vterm-nw
+  :commands my-vterm-nw
   :general
   (general-def
     :prefix "C-c s"
@@ -443,10 +443,8 @@
     "Open a terminal in a new window"
     (interactive)
     (split-window-horizontally)
-    (other-window)
-    (vterm))
-
-  (defalias 'vterm-nw 'my-vterm-nw))
+    (other-window 1)
+    (vterm)))
 
 ;; Tree-Sitter
 (use-package tree-sitter
