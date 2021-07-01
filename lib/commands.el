@@ -19,11 +19,21 @@
   (shell-command (concat "python3 -m venv " venv-dir-name)))
 
 ;;;###autoload
-(defun my-create-exploit-project (dir)
+(defun my-create-exploit-project (dir &optional link)
   "Creates a project for exploiting binaries"
   (interactive "DDirectory: ")
+  
   (my-create-python-project dir "asd.py" ".venv")
-  (let ((sh-cmd "source .venv/bin/activate && pip install pwntools && pip install ropper"))
-    (shell-command sh-cmd)))
+  (shell-command "chmod +x ./asd.py")
+  
+  (let ((sh-cmd "source .venv/bin/activate && pip install pwntools && 
+pip install ropper"))
+    (shell-command sh-cmd))
+  
+  (when link
+    (shell-command (format "wget %s" link)))
+
+  (with-temp-file (expand-file-name "profile.rr2" dir)
+    (insert "#!/usr/bin/rarun2")))
 
 (provide 'commands)
